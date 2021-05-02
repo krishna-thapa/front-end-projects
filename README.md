@@ -14,8 +14,11 @@ This is the simple project based on [Youtube tutorial](https://www.youtube.com/w
 2. Compile and run
     ```
     npm run electron:serve
-    npm run electron:build
+    npm run electron:build //Read point 3 before
     ```
 
-3. Improvements:
+3. Multi Platform Build
+  - "Don’t expect that you can build app for all platforms on one platform." Under the hood Vue-electron used the electron builder to build the app for multi-platform OS. Electron builder is a complete solution to package and build a ready for distribution Electron app for macOS, Windows and Linux with “auto update” support out of the box.[Read here](https://www.electron.build/multi-platform-build)
+
+4. Improvements:
   - Instead of `remote`, use `ipcRenderer` and `ipcMain`. [See here](https://www.electronjs.org/docs/api/remote)
