@@ -31,33 +31,49 @@ const formatSize = (size) => {
 
 export default {
   setup() {
+    // Contains the current path where user is, default to electron app
+    // Make an IPC call to backend process using electron remote
     const path = ref(app.getAppPath());
+
     const files = computed(() => {
+      // Reads the files in the directory, returns an array of files names
+      // for all the files and directories in the given path
       const fileNames = fs.readdirSync(path.value);
-      return fileNames
-        .map((file) => {
-          const stats = fs.statSync(pathModule.join(path.value, file));
-          return {
-            name: file,
-            size: stats.isFile() ? formatSize(stats.size ?? 0) : null,
-            directory: stats.isDirectory(),
-          };
-        })
-        .sort((a, b) => {
-          if (a.directory === b.directory) {
-            return a.name.localeCompare(b.name);
-          }
-          return a.directory ? -1 : 1;
-        });
+      return (
+        fileNames
+          .map((file) => {
+            // Iterate over each filename to check if it is file or directory
+            // and get the file size in human readable format
+            const stats = fs.statSync(pathModule.join(path.value, file));
+            return {
+              name: file,
+              size: stats.isFile() ? formatSize(stats.size ?? 0) : null,
+              directory: stats.isDirectory(),
+            };
+          })
+          // Sort the result to show the directories in first and then files
+          // and also sort the names in alphabetical order
+          .sort((a, b) => {
+            if (a.directory === b.directory) {
+              return a.name.localeCompare(b.name);
+            }
+            return a.directory ? -1 : 1;
+          })
+      );
     });
 
+    // Navigate outside of the current directory
     const back = () => {
       path.value = pathModule.dirname(path.value);
     };
+
+    // Append the folder name in the path
     const open = (folder) => {
       path.value = pathModule.join(path.value, folder);
     };
 
+    // Search operation on the files that starts with the input string
+    // Return all the array of files if no search result
     const searchString = ref("");
     const filteredFiles = computed(() => {
       return searchString.value
