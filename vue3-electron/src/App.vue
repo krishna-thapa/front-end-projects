@@ -9,6 +9,13 @@
         placeholder="File search"
       />
     </div>
+
+    <FilesViewer
+      :files="filteredFiles"
+      :nested="nested"
+      @back="back"
+      @folderclick="open($event.name)"
+    />
   </div>
 </template>
 
@@ -18,6 +25,8 @@ import pathModule from "path";
 
 import { app } from "@electron/remote";
 import { computed, ref } from "vue";
+
+import FilesViewer from "./components/FilesViewer";
 
 // Convert the byte number to human readable format
 const formatSize = (size) => {
@@ -30,6 +39,8 @@ const formatSize = (size) => {
 };
 
 export default {
+  name: "App",
+  components: { FilesViewer },
   setup() {
     // Contains the current path where user is, default to electron app
     // Make an IPC call to backend process using electron remote
