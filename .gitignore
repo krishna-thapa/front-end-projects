@@ -1,8 +1,12 @@
 .DS_Store
-/vue3-electron/node_modules/
+
+# Ignore on all sub-directories 
+node_modules/
+dist/
+
 /vue3-electron/dist/
 
-#Electron-builder output
+# Electron-builder output
 /vue3-electron/dist_electron/
 
 
