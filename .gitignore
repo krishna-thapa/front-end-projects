@@ -9,6 +9,8 @@ dist/
 # Electron-builder output
 /vue3-electron/dist_electron/
 
+# Ignore package-lock json files
+package-lock.json
 
 # local env files
 # .env.local
