@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   module: {
-    rules:[
+    rules: [
       {
         test: /\.ts$/,  //Regex
         use: 'ts-loader',
@@ -14,5 +14,10 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public')
+  },
+  devServer: {
+    publicPath: "/",
+    contentBase: "./public",
+    hot: true
   }
 }
