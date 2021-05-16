@@ -25,13 +25,25 @@ const addUIDGeneric2 = (obj) => {
     let uid = Math.floor(Math.random() * 100);
     return Object.assign(Object.assign({}, obj), { uid });
 };
+//let docFour = addUIDGeneric2('String name')
+// ENUMS
+// Each enum element has the index value stored so if you console log
+// then it will store the index value that starts from 0
+var ResourceType;
+(function (ResourceType) {
+    ResourceType[ResourceType["BOOK"] = 0] = "BOOK";
+    ResourceType[ResourceType["AUTHOR"] = 1] = "AUTHOR";
+    ResourceType[ResourceType["FILM"] = 2] = "FILM";
+    ResourceType[ResourceType["DIRECTOR"] = 3] = "DIRECTOR";
+    ResourceType[ResourceType["PERSON"] = 4] = "PERSON";
+})(ResourceType || (ResourceType = {}));
 const docFive = {
     uid: 1,
-    resourceName: 'person',
+    resourceName: ResourceType.PERSON,
     data: ['data in string']
 };
 const docSix = {
     uid: 1,
-    resourceName: 'person',
+    resourceName: ResourceType.AUTHOR,
     data: { name: 'data in string' }
 };

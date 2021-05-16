@@ -22,12 +22,14 @@ const ul = document.querySelector('ul');
 const list = new ListTemplate(ul);
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+    // Using tuples to declare the type of an array
+    let values = [tofrom.value, details.value, amount.valueAsNumber];
     let doc;
     if (type.value === 'invoice') {
-        doc = new InvoiceApp(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new InvoiceApp(...values); // values should be the tuple or else won't work in normal array
     }
     else {
-        doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new Payment(...values);
     }
     list.render(doc, type.value, 'start');
 });
