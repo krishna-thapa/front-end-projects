@@ -1,5 +1,9 @@
 # vue3-vuex-todo
 
+# TODO
+- Complete the project: https://www.youtube.com/watch?v=EeaYWLNXAwQ
+- Update the npm dependencies: `npm update`
+
 ## Project setup
 ```
 npm install
